@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine Letter</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffcccc;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .envelope {
+            position: relative;
+            width: 340px;
+            height: 220px;
+            background-color: #b30000;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+            border: 4px solid white;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: transform 0.5s ease;
+            z-index: 1;
+        }
+
+        .envelope:hover {
+            transform: scale(1.05);
+        }
+
+        .envelope .open-text {
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .letter-container {
+            width: 340px;
+            height: 300px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1s, visibility 1s;
+            z-index: 0;
+            padding: 20px;
+        }
+
+        .letter-container.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .letter-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100%;
+            width: 100%;
+        }
+
+        .letter-header {
+            font-size: 20px;
+            color: #b30000;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .letter-body {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #444;
+        }
+
+        .letter-footer {
+            font-size: 14px;
+            font-style: italic;
+            color: #b30000;
+        }
+
+        .signature {
+            font-weight: bold;
+            color: #b30000;
+            margin-top: 15px;
+        }
+
+        .swipe-btn {
+            margin-top: 15px;
+            background: #b30000;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .swipe-btn:hover {
+            background-color: #cc0000;
+        }
+
+        .decoration {
+            background-color: #ffcccc;
+            padding: 10px;
+            border-radius: 50%;
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 1;
+            font-size: 18px;
+            font-weight: bold;
+            color: #b30000;
+            transform: rotate(-30deg);
+        }
+
+        .reminder {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            color: #444;
+            margin-bottom: 10px;
+        }
+
+        .reminder .exclamation {
+            font-size: 30px;
+            color: #b30000;
+            margin-right: 10px;
+        }
+
+        .reminder .pushpin {
+            font-size: 25px;
+            color: #b30000;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="envelope" onclick="openLetter()">
+        <div class="open-text">Open Me ❤️</div>
+    </div>
+
+    <div class="letter-container" id="letter">
+        <div class="letter-page">
+            <div class="letter-header"> Remainder ❤️</div>
+            <div class="letter-body">
+                <div class="reminder">
+                </div>
+                You are precious and deeply loved! <br> Always remember that you are cherished not just today, but every day.
+            </div>
+            <div class="swipe-btn" onclick="nextPage()">Next</div>
+        </div>
+
+        <div class="letter-page">
+            <div class="letter-body">
+                <strong>Happy Valentine’s Day!</strong> 💖<br>
+                <p>Jesus loves you.</p>
+            </div>
+            <div class="swipe-btn" onclick="nextPage()">Next</div>
+        </div>
+
+        <div class="letter-page">
+            <div class="letter-body">
+                <strong>1 John 4:16</strong><br>
+                "So we have come to know and to believe the love that God has for us. God is love, and whoever abides in love abides in God, and God abides in him."
+            </div>
+            <div class="signature">With love,<br>xsz</div>
+        </div>
+    </div>
+
+    <div class="decoration">❤️</div>
+
+    <script>
+        let currentPage = 0;
+
+        function openLetter() {
+            document.getElementById('letter').classList.add('open');
+            document.querySelector('.envelope').style.display = 'none';
+        }
+
+        function nextPage() {
+            currentPage++;
+            if (currentPage < document.querySelectorAll('.letter-page').length) {
+                document.querySelectorAll('.letter-page')[currentPage - 1].style.display = 'none';
+                document.querySelectorAll('.letter-page')[currentPage].style.display = 'flex';
+            }
+        }
+
+        // Initially hide all pages except the first one
+        document.querySelectorAll('.letter-page').forEach((page, index) => {
+            if (index !== 0) {
+                page.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
